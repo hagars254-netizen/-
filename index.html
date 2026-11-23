@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>التسميع الصوتي</title>
+<link rel="preconnect" href="https://api.alquran.cloud">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="theme-a">
+<div class="wrap">
+  <nav class="nav">
+    <a href="#recitation" id="navRec" class="on">التسميع الصوتي</a>
+    <a href="#similar" id="navSim">المواضع والمتشابهات</a>
+  </nav>
+
+  <header class="hero" id="hero">
+    <span class="orn">۞</span>
+    <h1 id="hTitle">التسميع الصوتي</h1>
+    <p id="hSub">اختاري السورة والآيات، وسمّعي من حفظك</p>
+  </header>
+
+  <main class="card">
+
+    <!-- الشاشة الأولى: التسميع الصوتي -->
+    <section id="viewRec" class="view stagger">
+      <div class="row">
+        <div><label>السورة</label><select id="nSurah"></select></div>
+        <div><label>الربع (اختياري)</label><select id="nRub"><option value="">— اختيار الآيات يدويًا —</option></select></div>
+        <div><label>من آية</label><select id="nFrom"></select></div>
+        <div><label>إلى آية</label><select id="nTo"></select></div>
+        <button id="nGo" disabled>ابدأ الاختبار</button>
+      </div>
+      <p class="hint">اختاري السورة، ثم الربع باسمه (أو حددي الآيات بنفسك). أقصى عدد آيات: ١٠٠ آية</p>
+
+      <!-- لوحة مشتركة بين الشاشتين، بيتنقل مكانها بالجافا سكريبت -->
+      <div id="panel">
+        <div id="status" class="msg">جارِ تحميل المصحف...</div>
+        <div id="qBox" class="hide">
+          <span class="tag" id="tag"></span>
+          <div class="prompt">
+            ابدئي من: <b class="quran" id="from"></b><br>
+            <span id="toWrap">إلى: <b class="quran" id="to"></b></span>
+            <div class="chips" id="chips"></div>
+          </div>
+          <div class="actions">
+            <button id="start">🎤 ابدأ التسميع</button>
+            <button id="stop" class="sec" disabled>إنهاء وتصحيح</button>
+            <button id="reveal" class="sec">إظهار الآيات</button>
+          </div>
+          <div class="live" id="live"></div>
+          <textarea id="typed" placeholder="أو اكتبي التسميع هنا (لو الميكروفون مش شغال) ثم اضغطي «إنهاء وتصحيح»"></textarea>
+          <div class="result quran" id="result"></div>
+          <div class="score" id="score"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- الشاشة الثانية: المواضع والمتشابهات -->
+    <section id="viewSim" class="view stagger hide">
+      <div class="row">
+        <div><label>نوع التسميع</label>
+          <select id="mode">
+            <option value="sim">مواضع متشابهة</option>
+            <option value="any">آيات عشوائية (أي موضع)</option>
+          </select></div>
+        <div><label>النطاق</label>
+          <select id="scope">
+            <option value="surah">سورة</option>
+            <option value="juz">جزء</option>
+            <option value="hizb">حزب</option>
+            <option value="rub">ربع</option>
+            <option value="all">كل المصحف</option>
+          </select></div>
+        <div id="valBox"><label id="valLbl">السورة</label><select id="val"></select></div>
+        <div id="subBox" class="hide"><label>الربع (اختياري)</label><select id="subRub"></select></div>
+        <div><label>عدد الآيات</label>
+          <select id="cnt"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option></select></div>
+        <button id="newQ" disabled>سؤال جديد</button>
+      </div>
+    </section>
+
+  </main>
+</div>
+<script src="script.js"></script>
+<script>
+window.addEventListener('load',()=>{
+  if(!window.__tasmeeReady)document.getElementById('status').textContent='⚠️ ملف script.js مش متحمّل أو فيه خطأ. تأكدي إنه في نفس فولدر index.html وباسم script.js بالظبط.';
+});
+</script>
+</body>
+</html>
